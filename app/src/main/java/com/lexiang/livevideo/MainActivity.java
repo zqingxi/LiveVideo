@@ -3,15 +3,12 @@ package com.lexiang.livevideo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.tencent.rtmp.ITXLivePlayListener;
-import com.tencent.rtmp.ITXLivePushListener;
 import com.tencent.rtmp.TXLiveBase;
 import com.tencent.rtmp.TXLiveConstants;
 import com.tencent.rtmp.TXLivePlayConfig;
 import com.tencent.rtmp.TXLivePlayer;
-import com.tencent.rtmp.TXLivePusher;
 import com.tencent.rtmp.ui.TXCloudVideoView;
 
 import java.util.Arrays;
@@ -31,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         mView = (TXCloudVideoView) findViewById(R.id.video_view);
         //创建 player 对象
         mLivePlayer = new TXLivePlayer(this);
-
         //关联 player 对象与界面 view
         mLivePlayer.setPlayerView(mView);
         // 设置填充模式
@@ -46,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         mLivePlayer.enableHardwareDecode(false);
         mLivePlayer.setConfig(mPlayConfig);
         String flvUrl = "http://video.oaksh.cn/live/test.flv";
-
         mLivePlayer.setPlayListener(new ITXLivePlayListener(){
             @Override
             public void onPlayEvent(int event, Bundle param) {
@@ -63,11 +58,8 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onNetStatus(Bundle var1) {
-
             }
         });
-
-
         TXLivePlayer.ITXVideoRawDataListener rawDataListener = new TXLivePlayer.ITXVideoRawDataListener() {
             @Override
             public void onVideoRawDataAvailable(byte[] buf, int width, int height, int timestamp) {
@@ -77,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         mLivePlayer.setVideoRawDataListener(rawDataListener);
-
         // 推荐FLV
         mLivePlayer.startPlay(flvUrl, TXLivePlayer.PLAY_TYPE_LIVE_FLV);
 

@@ -63,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
         TXLivePlayer.ITXVideoRawDataListener rawDataListener = new TXLivePlayer.ITXVideoRawDataListener() {
             @Override
             public void onVideoRawDataAvailable(byte[] buf, int width, int height, int timestamp) {
-                Log.d("TAG", "onVideoRawDataAvailable : "  + Arrays.toString(buf) +
-                        "; width = " + width + "; height = " + height + "; timestamp = " + timestamp);
+                Log.d("TAG", "onVideoRawDataAvailable : "  + Arrays.toString(buf));
+                Log.d("buf.length : ", "" + buf.length);
+                Log.d("onVideoRawDataAvailable"," width = " + width + "; height = " + height + "; timestamp = " + timestamp);
                 mLivePlayer.addVideoRawData(buf);
             }
         };
@@ -80,4 +81,5 @@ public class MainActivity extends AppCompatActivity {
         mLivePlayer.stopPlay(true); // true 代表清除最后一帧画面
         mView.onDestroy();
     }
+//    native void pushBufferToOpenGL(byte []buffer,int width,int height);
 }
